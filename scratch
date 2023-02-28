@@ -1,11 +1,1 @@
-This command uses the following options:
-
-psexec @computerlist.txt -s -d powershell.exe -ExecutionPolicy Bypass -File "C:\path\to\your\script.ps1"
-
-
-@computerlist.txt: Specifies the text file containing the list of computer names.
--s: Runs the command as the System account.
--d: Runs the command in detached mode.
-powershell.exe: Specifies the command to run.
--ExecutionPolicy Bypass: Bypasses the PowerShell script execution policy to allow the script to run.
--File "C:\path\to\your\script.ps1": Specifies the path to the PowerShell script that you want to run.
+PowerShell script can be used to automate the installation of Windows updates through SCCM, offering a number of advantages over manual installation. Firstly, it can save time and reduce the workload for IT administrators by streamlining the update process. PowerShell can automate the entire process, from downloading the update files to deploying them across multiple devices. Additionally, PowerShell scripts offer greater flexibility and customization options, allowing administrators to choose specific updates to install, schedule updates at specific times, and even create alerts when updates fail to install. Overall, using PowerShell to install updates through SCCM can improve efficiency, reduce errors, and enhance the security and stability of a Windows environment.
