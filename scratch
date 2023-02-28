@@ -1,1 +1,7 @@
+Azure Active Directory (Azure AD) is a cloud-based identity and access management service provided by Microsoft that allows organizations to manage and secure access to various resources, including applications, devices, and data, in a centralized and efficient manner. Azure AD can be used to manage user accounts, assign permissions, and authenticate users across multiple cloud and on-premises applications and services.
 
+For workstations, Azure AD can be used to manage user accounts and device identity, as well as to enable secure sign-in and access to resources. By integrating with Windows 10 devices, Azure AD can provide a seamless and secure sign-in experience for users, with the ability to enforce policies and control access to resources based on factors such as user location, device health, and network conditions.
+
+Organizations can use Azure AD to manage and enforce policies for devices enrolled in their network, including the ability to remotely wipe or lock a lost or stolen device, enforce password policies, and control access to resources based on factors such as device compliance and risk level.
+
+In summary, using Azure AD for workstations provides organizations with a centralized and secure way to manage access to resources and enforce policies for users and devices, while also providing a seamless sign-in experience for users across multiple devices and applications.
