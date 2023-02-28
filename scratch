@@ -1,41 +1,29 @@
-Prepare the software update package: This may involve creating a software installer package or downloading it from a vendor's website. Ensure that the package is compatible with the target Windows computers.
+# Define variables for software name and path to installation file
+$SoftwareName = "CustomSoftware"
+$SoftwarePath = "\\server\share\CustomSoftware.msi"
 
-Create a script to deploy the software update: This script will use PowerShell to copy the update package to the target computers, run the installation command, and verify that the installation was successful. The script should also handle any errors that may occur during the installation process.
+# Read the list of computers from a text file
+$Computers = Get-Content -Path "C:\computers.txt"
 
-Configure PowerShell remoting: PowerShell remoting allows you to run PowerShell commands on remote computers. To configure PowerShell remoting, you'll need to run the Enable-PSRemoting command on each target computer.
+# Loop through each computer in the list and install the software
+foreach ($Computer in $Computers) {
+    # Construct the UNC path to the administrative share (C$)
+    $AdminShare = "\\" + $Computer + "\C$"
 
-Test the deployment: Before deploying the update to all the target computers, it's a good idea to test the deployment on a small group of computers to ensure that it works as expected.
+    # Check if the administrative share is accessible
+    if (Test-Path $AdminShare) {
+        # Construct the path to the installation file on the remote computer
+        $RemotePath = $AdminShare + "\" + $SoftwareName + ".msi"
 
-Here's an example PowerShell script that deploys a software update package to a group of computers:
+        # Copy the installation file to the remote computer
+        Copy-Item $SoftwarePath -Destination $RemotePath -Force
 
-powershell
-Copy code
-# Set the path to the update package
-$updatePackage = "\\server\share\update_package.msi"
-
-# Set the list of target computers
-$computers = "computer1", "computer2", "computer3"
-
-# Copy the update package to each computer
-ForEach ($computer in $computers) {
-    Copy-Item $updatePackage "\\$computer\c$\temp\update_package.msi"
-}
-
-# Install the update on each computer
-ForEach ($computer in $computers) {
-    Invoke-Command -ComputerName $computer -ScriptBlock {
-        Start-Process "msiexec.exe" -ArgumentList "/i c:\temp\update_package.msi /qn" -Wait
+        # Install the software silently using MSIEXEC
+        $Arguments = "/i `"$RemotePath`" /quiet"
+        $Process = [System.Diagnostics.Process]::Start("msiexec.exe", $Arguments)
+        $Process.WaitForExit()
+    }
+    else {
+        Write-Warning "Unable to connect to $Computer"
     }
 }
-
-# Verify that the installation was successful
-ForEach ($computer in $computers) {
-    Invoke-Command -ComputerName $computer -ScriptBlock {
-        if ((Get-WmiObject -Class Win32_Product | Where-Object {$_.Name -eq "Update Package"}) -ne $null) {
-            Write-Host "Update installed successfully."
-        } else {
-            Write-Host "Update installation failed."
-        }
-    }
-}
-In this script, the update package is copied to each computer's c:\temp folder, installed silently using the msiexec.exe command, and verified using the Get-WmiObject cmdlet
