@@ -1,1 +1,10 @@
+"We kindly request your approval to onboard privilege static accounts and Bitlocker keys for Self Service Machines onto CyberArk."
 
+Action Required:
+Please respond to the email to approve or reject the privilege static accounts and Bitlocker keys.
+
+Background Information:
+All privilege static accounts and keys to be onboarded to CyberArk require approval from the CIO. A GRACE finding for the asset will also be attached. Currently, the vendor (Consillion) holds these accounts and keys. In accordance with GIRP requirements, all privilege accounts, including the management accounts, must be secured. Keeping passwords and keys in CyberArk will mitigate security risks associated with Self Service Machines. The current infrastructure of Self Service Machines lacks the capability to secure privilege accounts and Bitlocker keys. However, efforts to update the infrastructure are underway.
+
+Risk:
+Static passwords and keys associated with our privilege accounts pose a significant security risk to NAB. Static passwords can be remembered, hard coded, and potentially recorded for unauthorized use.
